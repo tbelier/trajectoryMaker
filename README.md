@@ -1,5 +1,5 @@
 # Trajectory Creator for Autonomous Robots
-![Visualization of the 2D Trajectory](ressources/img/SnakeMapUnZoomed.png)
+![Visualization of the 2D Trajectory](ressources/img/SnakeMapZoomed.png)
 
 ## Overview
 This application allows you to design and define 2D trajectories for an autonomous robot. You can specify key waypoints that the robot must pass through, as well as the desired arrival angles at each point. The tool is particularly useful for robotics applications requiring precise navigation and control, such as underwater vehicles, drones, or mobile robots.
@@ -36,7 +36,7 @@ With this tool, you can:
 
 
 ## Example of visualizations: 
-![Zoomed View of the trajectory](ressources/img/SnakeMapZoomed.png)
+![Zoomed View of the trajectory](ressources/img/SnakeMapUnZoomed.png)
 
 ![Matplotlib view of the position and speed vectors in 2D](ressources/img/SnakePositionOverTime.png)
 
