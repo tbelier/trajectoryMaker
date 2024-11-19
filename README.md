@@ -29,9 +29,10 @@ With this tool, you can:
    
 2. Modify main.py according to your mission
 
-3. launch the file:
+3. Launch the file:
    ```bash
    python3 main.py
+
 4. Visualize your stored data in Mission/date/time/file.csv and view the GPS view with map.html
 
 
@@ -43,6 +44,7 @@ With this tool, you can:
 - each blue marker represents one of the points you want your robot to pass through during the mission.
 
 ![Zoomed View of the trajectory](ressources/img/SnakeMapUnZoomed.png)
+![UnZoomed View of the trajectory](ressources/img/SnakeMapZoomed.png)
 
 #### Visualize the 2D trajectory with matplotlib and get the speed vectors at each point :
 ![Matplotlib view of the position and speed vectors in 2D](ressources/img/SnakePositionOverTime.png)
