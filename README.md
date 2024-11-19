@@ -36,11 +36,20 @@ With this tool, you can:
 
 
 ## Example of visualizations: 
+#### Get a pre-visualization on Map of the mission :
+- you can zoom in and out,
+- the green marker is the start of the Mission,
+- the red one is the end,
+- each blue marker represents one of the points you want your robot to pass through during the mission.
+
 ![Zoomed View of the trajectory](ressources/img/SnakeMapUnZoomed.png)
 
+#### Visualize the 2D trajectory with matplotlib and get the speed vectors at each point :
 ![Matplotlib view of the position and speed vectors in 2D](ressources/img/SnakePositionOverTime.png)
 
+#### Focus on the X speed of your robot over time :
 ![Matplotlib view of the X speed of robots over time](ressources/img/SnakeSpeedOfXOverTime.png)
 
+#### Focus on the Y speed of your robot over time :
 ![Matplotlib view of the Y speed of robots over time](ressources/img/SnakeSpeedOfYOverTime.png)
 
