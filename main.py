@@ -77,7 +77,7 @@ if __name__ == "__main__":
     script_dir = os.path.dirname(script_path)
     
     # Choix de la mission à réaliser
-    lat0, lon0, X  = DockingFaceFromNE_withAngle(7,7,np.pi/4)
+    lat0, lon0, X  = Snake()
 
     fullTraj = FullTrajectory(X)
     fullTraj.display(["positionArrows", "speedX", "speedY"])
