@@ -3,11 +3,11 @@ import folium
 def displayMap(logsFilePath, zoom=15):
     Allpoints = []
     Checkpoints = []
-
+    print(f"{logsFilePath}/AllPoints.txt")
     # Lecture du fichier texte AllPoints.txt
     with open(f"{logsFilePath}/AllPoints.txt", mode='r') as fileAllpoints:
         for line in fileAllpoints:
-            row = line.strip().split()
+            row = line.strip().split(",")
             if len(row) >= 2:
                 lat, lon, t, dX, dY = map(float, row)
                 Allpoints.append((lat, lon))
