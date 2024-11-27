@@ -64,8 +64,8 @@ def displayMap(logsFilePath, zoom=15):
         ).add_to(m)
 
     # Sauvegarde la carte dans un fichier HTML
-    map_file = "/home/tbelier/Documents/GIT/thesis/tools/trajectoryMaker/map.html"
-    m.save(f"{logsFilePath}/map.html")
+    map_file = f"{logsFilePath}/map.html"
+    m.save(map_file)
     print(f"La carte a été sauvegardée dans le fichier {map_file}. Ouvrez ce fichier dans votre navigateur pour voir le résultat.")
 
 # Exemple d'utilisation

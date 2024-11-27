@@ -64,9 +64,19 @@ def DockingFaceFromNE_withAngle(delta_x, delta_y, delta_theta):
     lat0, lon0 = 48.199, -3.0157
     #     tk, xk, yk, dxk, dyk
     Nxy = np.sqrt(delta_x**2+delta_y**2)
-    X = [[110, 20+delta_x,  0+delta_y,   cos(delta_theta+arctan2(delta_y,delta_x)+np.pi),  sin(delta_theta+arctan2(delta_y,delta_x)+np.pi)],
-         [130,  20,  0,  -1,  0],
-         [220,  0,  0,  0,  0]]
+    X = [[0, 20+delta_x,  0+delta_y,   cos(delta_theta+arctan2(delta_y,delta_x)+np.pi),  sin(delta_theta+arctan2(delta_y,delta_x)+np.pi)],
+         [20,  20,  0,  -1,  0],
+         [40,  0,  0,  0,  0]]
+    return lat0,lon0,X
+
+
+def DockingFaceFromNW_withAngle(delta_x, delta_y, delta_theta):
+    lat0, lon0 = 48.199, -3.0157
+    #     tk, xk, yk, dxk, dyk
+    Nxy = np.sqrt(delta_x**2+delta_y**2)
+    X = [[0, -20+delta_x,  0+delta_y,   cos(delta_theta+arctan2(delta_y,delta_x)+np.pi),  sin(delta_theta+arctan2(delta_y,delta_x)+np.pi)],
+         [20,  -20,  0,  1,  0],
+         [40,  0,  0,  0,  0]]
     return lat0,lon0,X
 
 
@@ -77,11 +87,12 @@ if __name__ == "__main__":
     script_dir = os.path.dirname(script_path)
     
     # Choix de la mission à réaliser
-    lat0, lon0, X  = Snake()
+    #lat0, lon0, X  = DockingFaceFromNW_withAngle(-10,10,pi/4)
+    lat0, lon0, X  = DockingFaceFromNW_withAngle(-10,10,-pi/4)
 
     fullTraj = FullTrajectory(X)
-    fullTraj.display(["positionArrows", "speedX", "speedY"])
-    
+    #fullTraj.display(["positionArrows", "speedX", "speedY"])
+    fullTraj.display(["positionArrows"])
     logsFile = LoggingSystem(fullTraj, lat0, lon0)
     logsFile.writeDesiredTrajectory()
 
