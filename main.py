@@ -79,6 +79,24 @@ def DockingFaceFromNW_withAngle(delta_x, delta_y, delta_theta):
          [40,  0,  0,  0,  0]]
     return lat0,lon0,X
 
+def Triangle():
+    lat0, lon0 = 48.199123, -3.014585
+    #     tk, xk, yk, dxk, dyk
+    X = [[0, 0,  0, 0,  0],
+         [50,  -50,  0,  0,  1],
+         [100,  -50,  50,  1,  -1],
+         [150, 0,  0, 0,  0]]
+    return lat0,lon0,X
+
+def TriangleNE():
+    lat0, lon0 = 48.199123, -3.014585
+    #     tk, xk, yk, dxk, dyk
+    X = [[0, 0,  0, 0,  0],
+         [50,  0,  -50,  1,  0],
+         [100,  50,  -50,  -1,  1],
+         [150, 0,  0, 0,  0]]
+    return lat0,lon0,X
+
 
 if __name__ == "__main__":
 
@@ -87,12 +105,11 @@ if __name__ == "__main__":
     script_dir = os.path.dirname(script_path)
     
     # Choix de la mission à réaliser
-    #lat0, lon0, X  = DockingFaceFromNW_withAngle(-10,10,pi/4)
-    lat0, lon0, X  = DockingFaceFromNW_withAngle(-10,10,-pi/4)
+    lat0, lon0, X  = TriangleNE()
 
     fullTraj = FullTrajectory(X)
-    #fullTraj.display(["positionArrows", "speedX", "speedY"])
-    fullTraj.display(["positionArrows"])
+    fullTraj.display(["positionArrows", "speedN", "speedE"])
+    #fullTraj.display(["positionArrows"])
     logsFile = LoggingSystem(fullTraj, lat0, lon0)
     logsFile.writeDesiredTrajectory()
 

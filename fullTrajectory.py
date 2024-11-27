@@ -16,7 +16,7 @@ class FullTrajectory():
     def displayPositionXY(self, drawArrows = False):
         print(f"len(self.Lpolynome) : {len(self.Lpolynome)}")
         for k in range(len(self.Lpolynome)):
-            X, Y, dotX, dotY = self.Lpolynome[k].X, self.Lpolynome[k].Y, self.Lpolynome[k].dotX, self.Lpolynome[k].dotY
+            Y, X, dotY, dotX = self.Lpolynome[k].X, self.Lpolynome[k].Y, self.Lpolynome[k].dotX, self.Lpolynome[k].dotY
             
             figure("Position Over Time")
             if k==0:
@@ -42,22 +42,22 @@ class FullTrajectory():
 
 
 
-    def displaySpeedXOverTime(self):
-        figure("Speed of X over time")
+    def displaySpeedNOverTime(self):
+        figure("Speed of N over time")
         for k in range(len(self.Lpolynome)):
-            t, dotX = self.Lpolynome[k].t, self.Lpolynome[k].dotX
-            if k == 0 : plot(t, dotX, label="dotX(t)")
-            else : plot(t, dotX)
+            t, dotN = self.Lpolynome[k].t, self.Lpolynome[k].dotY
+            if k == 0 : plot(t, dotN, label="dotN(t)")
+            else : plot(t, dotN)
         legend()
 
-    def displaySpeedYOverTime(self):
-        figure("Speed of Y over time")
+    def displaySpeedEOverTime(self):
+        figure("Speed of E over time")
         for k in range(len(self.Lpolynome)):
-            t, dotY = self.Lpolynome[k].t, self.Lpolynome[k].dotY
+            t, dotE = self.Lpolynome[k].t, self.Lpolynome[k].dotX
             if k == 0 :
-                plot(t, dotY, label="dotY(t)")
+                plot(t, dotE, label="dotY(t)")
             else :
-                plot(t, dotY)
+                plot(t, dotE)
         legend()
 
     def display(self, L):
@@ -65,7 +65,7 @@ class FullTrajectory():
             self.displayPositionXY()
         if "positionArrows" in L:
             self.displayPositionXY(True)
-        if "speedX" in L:
-            self.displaySpeedXOverTime()
-        if "speedY" in L:
-            self.displaySpeedYOverTime()
+        if "speedN" in L:
+            self.displaySpeedNOverTime()
+        if "speedE" in L:
+            self.displaySpeedEOverTime()

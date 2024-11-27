@@ -6,8 +6,8 @@ import os
 def convert_xy2latlon(x, y, lat0, lon0):
     R = 6378137  # Rayon moyen de la Terre en mètres
     lat0_rad = np.radians(lat0)
-    dlat = y / R
-    dlon = x / (R * np.cos(lat0_rad))
+    dlat = x / R
+    dlon = y / (R * np.cos(lat0_rad))
     lat = lat0 + dlat * 180 / np.pi
     lon = lon0 + dlon * 180 / np.pi
     return lat, lon
