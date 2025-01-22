@@ -33,10 +33,10 @@ def DockingFaceFromSW():
 def DockingFaceFromSE(): 
     lat0, lon0 = 48.199, -3.0157
     #     tk, xk, yk, dxk, dyk
-    X = [[ 0,  50,  -20,   0,  0],
-         [90,   -40,  -20,   -1,  0],
-         [110, -50,  -10,   0,  1],
-         [130,  -40,  0,  1,  0],
+    X = [[ 0,  -50,  20,   0,  0],
+         [90,   40,  20,   1,  0],
+         [110, 50,  10,   0,  -1],
+         [130,  40,  0,  -1,  0],
          [220,  0,  0,  0,  0]]
     return lat0,lon0,X
 
@@ -105,7 +105,7 @@ if __name__ == "__main__":
     script_dir = os.path.dirname(script_path)
     
     # Choix de la mission à réaliser
-    lat0, lon0, X  = TriangleNE()
+    lat0, lon0, X  = Snake()
 
     fullTraj = FullTrajectory(X)
     fullTraj.display(["positionArrows", "speedN", "speedE"])

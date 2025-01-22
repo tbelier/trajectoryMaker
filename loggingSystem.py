@@ -17,17 +17,21 @@ class LoggingSystem():
         self.architecture = self.fileArchitecture()
         self.fileCheckpoints = open(f"{self.architecture}/Checkpoints.txt", mode='w')
         self.fileAllPoints = open(f"{self.architecture}/AllPoints.txt", mode='w')
+        self.fileAllPointsXY = open(f"{self.architecture}/AllPointsXY.txt", mode='w')
+        self.fileAllPointsXyNpyPath = f"{self.architecture}/AllPointsXY.npy"
         self.fullTrajectory = fullTrajectory
         self.lat0, self.lon0 = lat0, lon0
 
-    def writeDesiredTrajectory(self, createmap=True):
+    def writeDesiredTrajectory(self, createmap=True, txy=True):
         points = self.fullTrajectory.points
         for k in range(len(points)):
             x, y, t, dx, dy = points[k]
             lat, lon = convert_xy2latlon(x, y, self.lat0, self.lon0)
             self.fileAllPoints.write(f"{lat},{lon},{t},{dx},{dy}\n")
-        
+            self.fileAllPointsXY.write(f"{x},{y}\n")
+            
         self.fileAllPoints.close()
+        self.fileAllPointsXY.close()
 
         for k in range(len(self.fullTrajectory.Lpolynome)):
             polyK = self.fullTrajectory.Lpolynome[k]
@@ -41,6 +45,9 @@ class LoggingSystem():
         self.fileCheckpoints.write(f"{lat},{lon},{t},{dx},{dy}\n")
 
         self.fileCheckpoints.close()
+        print(np.array(points)[:,:2])
+        np.save(self.fileAllPointsXyNpyPath, np.array(points)[:,:2])
+
 
     def fileArchitecture(self):
         now = datetime.now()
