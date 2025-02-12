@@ -13,12 +13,14 @@ def convert_xy2latlon(x, y, lat0, lon0):
     return lat, lon
 
 class LoggingSystem():
-    def __init__(self, fullTrajectory, lat0, lon0):
+    def __init__(self, fullTrajectory, lat0, lon0,doXYCSTheta=True):
+        self.doXYCSTheta = doXYCSTheta
         self.architecture = self.fileArchitecture()
         self.fileCheckpoints = open(f"{self.architecture}/Checkpoints.txt", mode='w')
         self.fileAllPoints = open(f"{self.architecture}/AllPoints.txt", mode='w')
         self.fileAllPointsXY = open(f"{self.architecture}/AllPointsXY.txt", mode='w')
         self.fileAllPointsXyNpyPath = f"{self.architecture}/AllPointsXY.npy"
+        self.fileAllPointsXyCSThetaNpyPath = f"{self.architecture}/AllPointsXYCSTheta.npy"
         self.fullTrajectory = fullTrajectory
         self.lat0, self.lon0 = lat0, lon0
 
@@ -47,6 +49,37 @@ class LoggingSystem():
         self.fileCheckpoints.close()
         print(np.array(points)[:,:2])
         np.save(self.fileAllPointsXyNpyPath, np.array(points)[:,:2])
+
+        if self.doXYCSTheta == True: # from pathFollowing2DPython
+            loaded_array = np.load(self.fileAllPointsXyNpyPath)
+            print(f"Doing XYCSTheta from file at location : {loaded_array}")
+            LX = loaded_array[:,0]
+            LY = loaded_array[:,1]
+
+            Lx, Ly, Lc, Ls, Ltheta = [0],[0],[0],[0],[0]
+            for k in range(1,len(LX)-1):
+                xk_1, xk = LX[k-1], LX[k] 
+                yk_1, yk = LY[k-1], LY[k] 
+
+                sk_1 = Ls[-1]
+                sk = sk_1 + np.sqrt((yk_1-yk)**2+(xk_1-xk)**2)
+
+                thetak_1 = Ltheta[-1]
+                thetak = np.arctan2(yk-yk_1, xk-xk_1)
+
+                ck = (thetak-thetak_1)/sk
+
+                Lx.append(xk)
+                Ly.append(yk)
+                Lc.append(ck)
+                Ls.append(sk)
+                Ltheta.append(thetak)
+                
+
+            array = np.column_stack((Lx,Ly,Lc,Ls,Ltheta))
+            print(array)
+            print(f"Doing XYCSTheta from file at location : {self.fileAllPointsXyCSThetaNpyPath}")
+            np.save(self.fileAllPointsXyCSThetaNpyPath, array)
 
 
     def fileArchitecture(self):

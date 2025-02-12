@@ -30,6 +30,16 @@ def DockingFaceFromSW():
          [220,  0,  0,  0,  0]]
     return lat0,lon0,X
 
+def DockingPiscine(): 
+    lat0, lon0 = 48.199, -3.0157
+    #     tk, xk, yk, dxk, dyk
+    X = [[0,   0,  0,  0.3,  0],
+         [5,   1,  1,  0,  0.3],
+         [10,  0,  2, -0.3,  0],
+         [15, -1,  1,  0, -0.3],
+         [20,  0,  0,  0.3,  0]]
+    return lat0,lon0,X
+
 def DockingFaceFromSE(): 
     lat0, lon0 = 48.199, -3.0157
     #     tk, xk, yk, dxk, dyk
@@ -105,11 +115,10 @@ if __name__ == "__main__":
     script_dir = os.path.dirname(script_path)
     
     # Choix de la mission à réaliser
-    lat0, lon0, X  = Snake()
+    lat0, lon0, X  = DockingPiscine()
 
     fullTraj = FullTrajectory(X)
     fullTraj.display(["positionArrows", "speedN", "speedE"])
-    #fullTraj.display(["positionArrows"])
     logsFile = LoggingSystem(fullTraj, lat0, lon0)
     logsFile.writeDesiredTrajectory()
 
